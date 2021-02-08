@@ -1,0 +1,29 @@
+1.
+    grab the number of hits on the variable search_name website
+    store that value in a HITS Variable
+
+2.
+    take that number and divide it by 10 to get the page number
+        if number is an integer then add 1
+    store that value in a num_of_Pages Variable
+3.
+    now i want to grab the business id numbers on the website
+    Store this in a List business_id_nums
+4.
+    for each business_id_num
+        scrape the webpage for the content
+            name,address,phone number,description,tags,logo
+        store that in a Dictionary business_info
+    store this in a List business_info_list
+5.
+    i want to be able to save this info into either a EXCEL spreadsheet or a Database
+        Excel
+            i want to open an excel workbook(filename, path to file)
+                if there is no workbook saved, open a new one
+                if there is no worksheet create a new one with search_name
+
+            write business_info_list content into worksheet
+            save workbook
+            close workbook
+
+
