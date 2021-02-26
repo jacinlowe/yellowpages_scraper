@@ -95,8 +95,7 @@ if __name__ == '__main__':
 
     construction = BusinessSearch('construction')
     cars = BusinessSearch('cars')
-    newlist = []
-    newlist = construction.business_ids + cars.business_ids
+    newlist = [construction.business_ids + cars.business_ids]
     print(len(construction.business_ids))
     print(len(cars.business_ids))
 

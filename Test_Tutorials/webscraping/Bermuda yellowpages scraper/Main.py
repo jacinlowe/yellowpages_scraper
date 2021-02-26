@@ -1,14 +1,10 @@
-import os
-from concurrent.futures import ThreadPoolExecutor
-from functools import partial
-import threading
 import requests
-import openpyxl
 import time
 
 
-from Test_Tutorials.webscraping.scrape_code import get_ids, store_to_database, save_excel_book, open_workbook
-from Test_Tutorials.webscraping.webscrapingtest import BusinessSearch
+from .scrape_code import get_ids, store_to_database, open_workbook
+from .initial_id_grab import BusinessSearch
+
 
 def main():
     url = 'https://www.bermudayp.com/listing/view/'
