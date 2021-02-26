@@ -1,0 +1,5 @@
+steps:
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v2
+      with:
+        path: 'requirments.txt'
