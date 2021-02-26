@@ -1,5 +1,7 @@
 steps:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v2
+      bs4
+      openpyxl
       with:
-        path: 'requirments.txt'
+        path: 'requirements.txt'
