@@ -1,9 +1,9 @@
-import requests
 import time
 
+import requests
 
-from .scrape_code import get_ids, store_to_database, open_workbook
 from .initial_id_grab import BusinessSearch
+from .scrape_code import get_ids, store_to_database, open_workbook
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
     wb = open_workbook(wb)
     store_to_database(list_of_businesses, wb)
     # save_excel_book(wb)
-    wb.save('BusinessList.xlsx')
+    wb.save('temp.xlsx')
 
 
 if __name__ == '__main__':

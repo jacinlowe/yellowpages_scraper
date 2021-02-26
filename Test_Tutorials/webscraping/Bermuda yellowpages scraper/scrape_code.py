@@ -1,11 +1,11 @@
-from bs4 import BeautifulSoup as bs
-import openpyxl
 from pathlib import Path
-import os
+
+import openpyxl
+from bs4 import BeautifulSoup as bs
 
 
 def get_ids(content):
-    # ### BUSINESS NAME ###
+    # ### BUSINESS NAMES ###
     soup = bs(content.content, features='html.parser')
     title = soup.find(attrs={'class': 'block-title'}).h3.string
 

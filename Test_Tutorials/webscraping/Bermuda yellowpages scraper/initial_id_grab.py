@@ -1,8 +1,9 @@
-import requests
-from bs4 import BeautifulSoup as bs
 import concurrent.futures
 import threading
 import time
+
+import requests
+from bs4 import BeautifulSoup as bs
 
 """
 Documentation website
@@ -88,7 +89,7 @@ class BusinessSearch:
         start_time = time.time()
         download_all_sites(sites)
         duration = time.time() - start_time
-        print(f"Downloaded {len(sites)} pages of {self.category.capitalize()} in {duration} seconds")
+        print(f"Downloaded {len(sites)} Pages of {self.category.capitalize()} in {duration} seconds")
 
 
 if __name__ == '__main__':
