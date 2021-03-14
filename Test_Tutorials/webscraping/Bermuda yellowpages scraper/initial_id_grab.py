@@ -28,6 +28,7 @@ https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 """
 
+
 class BusinessSearch:
     def __init__(self, category):
         self.search_page = 'https://www.bermudayp.com/businesses/search/'
@@ -59,23 +60,31 @@ class BusinessSearch:
         :return:
         '''
         self.pages = hits/10
-        if not self.pages.is_integer():
+        if not isinstance(self.pages, int):
             self.pages = int(self.pages) + 1
+        else:
+
+            return
 
     def grab_business_ids(self):
+        temp_id = []
+
         def get_ids(content):
             soup = bs(content, features='html.parser')
             business_collect = soup.select('div[data-listing-id]')
             for id in business_collect:
-                self.business_ids.append(int(id['data-listing-id']))
+                # print('gotten')
+                temp_id.append(int(id['data-listing-id']))
 
         def get_session():
             if not hasattr(thread_local, "session"):
+
                 thread_local.session = requests.Session()
             return thread_local.session
 
         def download_site(url):
             session = get_session()
+
             with session.get(url) as response:
                 # print(f"Read {round((len(response.content)/1024)/2)} mb from {url}")
                 get_ids(response.content)
@@ -85,19 +94,21 @@ class BusinessSearch:
                 executor.map(download_site, sites)
 
         thread_local = threading.local()
-        sites = [f'{self.search_page}{page}/construction' for page in range(1, self.pages + 1)]
+        sites = [f'{self.search_page}{page}/{self.category}' for page in range(1, self.pages + 1)]
         start_time = time.time()
         download_all_sites(sites)
+        self.business_ids = temp_id
+
         duration = time.time() - start_time
-        print(f"Downloaded {len(sites)} Pages of {self.category.capitalize()} in {duration} seconds")
+        print(f"Downloaded {len(sites)} Pages of {self.category.capitalize()} in {round(duration, 2)} seconds")
+        print(f'Num of Ids: {len(self.business_ids)} recieved')
 
 
 if __name__ == '__main__':
-
     construction = BusinessSearch('construction')
     cars = BusinessSearch('cars')
     newlist = [construction.business_ids + cars.business_ids]
-    print(len(construction.business_ids))
-    print(len(cars.business_ids))
+    # print(len(construction.business_ids))
+    # print(len(cars.business_ids))
 
     print(len(newlist))

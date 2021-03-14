@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import openpyxl
+import requests
 from bs4 import BeautifulSoup as bs
 
 
@@ -46,7 +47,8 @@ def get_ids(content):
                 'Phone Numbers': phone_number,
                 'Description'  : description,
                 'Tags'         : tags,
-                'Logo'         : logo
+                'Logo'         : logo,
+                'BusinessType' : tags[0].title()
                 }
     return business
 
@@ -97,3 +99,13 @@ def open_workbook(workbook_name='file.xlsx', dest='', sheet_title='sheet', heade
         ws.title = sheet_title
         ws.append(header)
         return workbook
+
+
+def main():
+    url = 'https://www.bermudayp.com/listing/view/458338'
+    r = requests.get(url)
+    print(get_ids(r))
+
+
+if __name__ == '__main__':
+    main()
