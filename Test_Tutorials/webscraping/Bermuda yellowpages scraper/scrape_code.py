@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 
 
-def get_ids(content):
+def get_ids(content, catagory):
     # ### BUSINESS NAMES ###
     soup = bs(content.content, features='html.parser')
     title = soup.find(attrs={'class': 'block-title'}).h3.string
@@ -48,7 +48,7 @@ def get_ids(content):
                 'Description'  : description,
                 'Tags'         : tags,
                 'Logo'         : logo,
-                'BusinessType' : tags[0].title()
+                'BusinessType': [catagory.title(), tags[0].title()]
                 }
     return business
 
